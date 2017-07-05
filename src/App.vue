@@ -14,7 +14,15 @@
  </template>
 
 <script> 
+  
+  import Panel from './components/shared/panel/Panel.vue';
+
   export default {
+  
+    components: {
+      'my-panel' : Panel   //Declaring that you are using the panel imported with nick name, registering
+    },
+
     data(){
       return {  //LifeCycle Hooks: when a component is created, pass through steps and each step let us to execute some code
         pictures: []

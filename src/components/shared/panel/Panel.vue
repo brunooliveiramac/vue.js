@@ -1,8 +1,9 @@
 <template>
       <div class="panel"> 
-        <h2 class="panel-title"></h2>
+        <h2 class="panel-title">{{ title }}</h2>
         <div class="panel-body"> 
-
+            <slot class="panel-content">   
+            </slot>
         </div>
       </div>      
 </template>
@@ -10,10 +11,12 @@
 <script> 
   export default {
     
-  }
-</script>
+    props:['title']
 
-<style>
+  }
+</script> 
+
+<style scoped>
 
   .panel {
   padding: 0 auto;
@@ -35,5 +38,9 @@
   padding: 10px;
   text-transform: uppercase;
 }
+
+ * {
+    box-shadow: 5px 5px 5px;
+  }
 
 </style>
