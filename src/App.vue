@@ -1,12 +1,14 @@
 <template>
   <div class="body">
    
-  <h1 class="center"> </h1>
+  <h1 class="center"> {{ title }} </h1>
+  
 
+  <input type="search" class="filter" v-on:input="filter = $event.target.value" placeholder="Filter"/>
   <ul class="pic-list">
-    <li class="pic-list-item" v-for="picture of pictures">
+    <li class="pic-list-item" v-for="picture of picturesWithFilter">
       <my-panel :title="picture.titulo">
-        <img class="responsive-image" v-bind:src="picture.url" v-bind:alt="picture.titulo"><img/>
+        <responsible-image :url="picture.url" :title="picture.titulo"/>
       </my-panel>
     </li>
   </ul> 
@@ -16,16 +18,32 @@
 <script> 
   
   import Panel from './components/shared/panel/Panel.vue';
+  import ResponsibleImage from './components/shared/responsible-image/ResponsibleImage.vue';
+
 
   export default {
   
     components: {
-      'my-panel' : Panel   //Declaring that you are using the panel imported with nick name, registering
+      'my-panel' : Panel,   //Declaring that you are using the panel imported with nick name, registering
+      'responsible-image' : ResponsibleImage
     },
 
     data(){
       return {  //LifeCycle Hooks: when a component is created, pass through steps and each step let us to execute some code
-        pictures: []
+        title : 'Vue Js',
+        pictures: [],
+        filter: ''
+      }
+    },
+
+    computed: {  //value that need to be processed
+      picturesWithFilter(){  
+        if(this.filter){
+          let exp = new RegExp(this.filter.trim(), 'i');
+          return this.pictures.filter(picture => exp.test(picture.titulo));
+        } else {
+          return this.pictures;
+        }
       }
     },
 
@@ -45,6 +63,7 @@
     }
 
   .center{
+    color: #42b983;
     text-align: center;
   }
 
@@ -56,7 +75,9 @@
     display: inline-block;
   }
 
-  .responsive-image {
+  .filter {
+    display: block;
     width: 100%;
+    border: solid 2px grey;
   }
 </style>

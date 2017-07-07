@@ -1,17 +1,24 @@
 <template>
       <div class="panel"> 
-        <h2 class="panel-title">{{ title }}</h2>
-        <div class="panel-body"> 
-            <slot class="panel-content">   
-            </slot>
-        </div>
+        <h2 class="panel-title" @click="visible = !visible">{{ title }}</h2>  <!-- @ same as v-on -->
+          <transition name="panel-fade"> <!-- only one element inside -->
+              <div class="panel-content" v-show="visible">
+                <slot></slot>
+              </div> 
+         </transition>
       </div>      
 </template>
 
 <script> 
   export default {
     
-    props:['title']
+    props:['title'],
+
+    data() {
+      return {
+        visible: true
+      }
+    }
 
   }
 </script> 
@@ -30,7 +37,7 @@
   text-align: center;
 }
 
-.painel .panel-title {
+.panel .panel-title {
   text-align: center;
   border: solid 2px;
   background: lightblue;
@@ -39,8 +46,16 @@
   text-transform: uppercase;
 }
 
- * {
+* {
     box-shadow: 5px 5px 5px;
   }
+
+.panel-fade-enter, .panel-fade-leave-active {
+  opacity: 0
+}
+
+.panel-fade-enter-active, .panel-fade-leave-active {
+  transition: opacity .4s
+}
 
 </style>
