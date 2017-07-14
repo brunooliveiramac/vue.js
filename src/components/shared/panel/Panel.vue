@@ -3,7 +3,9 @@
         <h2 class="panel-title" @click="visible = !visible">{{ title }}</h2>  <!-- @ same as v-on -->
           <transition name="panel-fade"> <!-- only one element inside -->
               <div class="panel-content" v-show="visible">
-                <slot></slot>
+                <slot name="my-button"></slot>
+                <slot name="responsible-image"></slot>
+
               </div> 
          </transition>
       </div>      
