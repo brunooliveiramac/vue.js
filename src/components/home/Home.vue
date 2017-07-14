@@ -7,7 +7,7 @@
   <ul class="pic-list">
     <li class="pic-list-item" v-for="picture of picturesWithFilter">
       <my-panel :title="picture.titulo">
-        <responsible-image v-my-transform="{increment: 14, animate: true}" slot="my-button" :url="picture.url" :title="picture.titulo"/>
+        <responsible-image v-my-transform.animate="{increment: 14, animate: true}" slot="my-button" :url="picture.url" :title="picture.titulo"/>
         <my-button 
           slot="responsible-image"
           type="button" 

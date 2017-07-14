@@ -60,5 +60,8 @@
   transition: opacity .4s
 }
 
+.panel-content{
+  overflow: hidden;
+}
 
 </style>
